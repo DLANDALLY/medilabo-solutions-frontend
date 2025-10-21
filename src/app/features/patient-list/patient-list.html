@@ -1,0 +1,84 @@
+
+<mat-card class="patient-card">
+  <div class="header-container">
+    <h2 class="title">Liste des patients</h2>
+    <button mat-icon-button color="primary" class="edit-btn" (click)="openAddPatientDialog()">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+
+  @if (checkData == false) {
+    <div class="loader">
+      <ng-lottie [options]="lottie.loading"></ng-lottie>
+    </div>
+  } @else {
+    <mat-form-field appearance="outline" class="search-bar">
+      <mat-label>Rechercher un patient</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Nom, prénom, ou genre" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  }
+
+  <div class="table-container">
+    <table mat-table [dataSource]="filteredPatients" class="mat-elevation-z3 full-width-table">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- First Name -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Prénom </th>
+        <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+      </ng-container>
+
+      <!-- Last Name -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+      </ng-container>
+
+      <!-- Gender -->
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Sexe </th>
+        <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
+      </ng-container>
+
+      <!-- Date of Birth -->
+      <ng-container matColumnDef="dateOfBirth">
+        <th mat-header-cell *matHeaderCellDef> Date de naissance </th>
+        <td mat-cell *matCellDef="let element">{{ element.dateOfBirth | date }}</td>
+      </ng-container>
+
+      <!-- Address -->
+      <ng-container matColumnDef="postalAddress">
+        <th mat-header-cell *matHeaderCellDef> Adresse </th>
+        <td mat-cell *matCellDef="let element">{{ element.postalAddress }}</td>
+      </ng-container>
+
+      <!-- Phone -->
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef> Téléphone </th>
+        <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
+      </ng-container>
+
+      <!-- Action -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" (click)="viewPatient(element.id, element)">
+          <button type="button">View</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</mat-card>
+
+
+  
+
+ 

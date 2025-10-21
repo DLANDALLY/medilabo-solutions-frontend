@@ -1,0 +1,39 @@
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.notes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #333;
+    background: #f9f9f9;
+    border-left: 4px solid #3f51b5; // couleur Material
+    border-radius: 4px;
+    padding: 8px 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #3f51b5;
+      font-size: 24px;
+    }
+  }
+}

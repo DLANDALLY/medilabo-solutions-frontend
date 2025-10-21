@@ -1,0 +1,102 @@
+<!-- Détails du patient -->
+<div class="patient-detail-container">
+
+  <!-- Titre principal -->
+  <h2 class="title">
+    <mat-icon color="primary">person</mat-icon>
+    Détails du patient
+  </h2>
+
+  <!-- Carte principale -->
+  <mat-card class="info-card">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar">
+        <mat-icon>badge</mat-icon>
+      </div>
+
+      <mat-card-title class="patient-name">
+        {{ patient?.firstName }} {{ patient?.lastName }}
+      </mat-card-title>
+
+      <button matIconButton color="primary" class="edit-btn" (click)="openEditDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="info-grid">
+        <div class="info-item">
+          <mat-icon color="primary">badge</mat-icon>
+          <span class="label">ID :</span>
+          <span class="value">{{ patient?.id }}</span>
+        </div>
+
+        <div class="info-item">
+          <mat-icon color="accent">wc</mat-icon>
+          <span class="label">Genre :</span>
+          <span class="value">{{ patient?.gender }}</span>
+        </div>
+
+        <div class="info-item">
+          <mat-icon color="primary">call</mat-icon>
+          <span class="label">Téléphone :</span>
+          <span class="value">{{ patient?.phoneNumber }}</span>
+        </div>
+
+        <div class="info-item">
+          <mat-icon color="primary">home</mat-icon>
+          <span class="label">Adresse :</span>
+          <span class="value">{{ patient?.postalAddress }}</span>
+        </div>
+
+        <div class="info-item">
+          <mat-icon color="warn">calendar_today</mat-icon>
+          <span class="label">Né(e) le :</span>
+          <span class="value">{{ patient?.dateOfBirth }}</span>
+        </div>
+
+        <div class="info-item">
+          <mat-icon color="warn">calendar_today</mat-icon>
+          <span class="label">Créé le :</span>
+          <span class="value">{{ patient?.createAt }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Dossier médical -->
+  <div class="subsection-grid">
+    <mat-card class="sub-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon color="accent">description</mat-icon>
+          Dossier médical
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-medical-record [medicalRecord]="medicalRecord"></app-medical-record>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Reporting -->
+    <mat-card class="sub-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon color="warn">analytics</mat-icon>
+          Reporting du patient
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-reporting [reporting]="reporting"></app-reporting>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Bouton retour -->
+  <div class="back-btn">
+    <button mat-stroked-button color="primary" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Retour à la liste
+    </button>
+  </div>
+</div>

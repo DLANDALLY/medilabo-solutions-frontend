@@ -1,0 +1,8 @@
+@if (medicalRecord) {
+  <ul class="notes-list">
+      @for (note of medicalRecord.medicalHistoricalDtos; track $index) {
+        <li> {{ note.note }} </li>
+      }
+  </ul>
+}
+

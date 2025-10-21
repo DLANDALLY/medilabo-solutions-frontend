@@ -1,0 +1,118 @@
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IPatient } from '../interfaces/IPatient';
+import { PatientService } from '../../services/patient/patient';
+import { MedicalRecord } from "../medical-record/medical-record";
+import { Reporting } from "../reporting/reporting";
+import { MatCardModule } from "@angular/material/card";
+import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { PatientEdit } from '../patient-edit/patient-edit';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MedicalRecordService } from '../../services/medical-record/medical-record';
+import { IMedicalRecord } from '../interfaces/IMedicalRecord';
+import { ReportingService } from '../../services/reporting/reporting';
+import { IReporting } from '../interfaces/IReporting';
+
+@Component({
+  selector: 'app-patient-detail',
+  imports: [
+    MedicalRecord, 
+    Reporting, 
+    MatCardModule, 
+    MatIcon,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+  ],
+  templateUrl: './patient-detail.html',
+  styleUrl: './patient-detail.scss'
+})
+export class PatientDetail {
+  patient: IPatient | null = null;
+  patientId: number | null = null;
+  medicalRecord!: IMedicalRecord ;
+  reporting!: IReporting ;
+
+  constructor(
+    private router: Router, 
+    private patientService: PatientService, 
+    private medicalRecordService: MedicalRecordService,
+    private reportingService: ReportingService,
+    private route: ActivatedRoute,
+    private dialog: MatDialog
+  ){}
+
+  ngOnInit(){
+    this.loadPatient();
+    this.loadMedicalRecord();
+    this.loadReporting();
+  }
+
+  loadPatient(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.patientId = idParam ? +idParam : null;
+    
+    const navigation = this.router.getCurrentNavigation();
+    const statePatient = navigation?.extras?.state?.['patient'];
+    //const statePatient = history.state?.patient;
+
+    if (statePatient) {
+      this.patient = statePatient;
+    } else if (this.patientId) {
+      this.patientService.getPatientById(this.patientId).subscribe({
+        next: (data) => (this.patient = data),
+        error: (err) => console.error('Erreur chargement patient', err),
+      });
+    } else {
+      console.error('Aucun ID patient trouvé');
+    }
+  }
+
+  loadMedicalRecord(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.patientId = idParam ? +idParam : null;
+    if(!this.patientId) return ;
+
+    this.medicalRecordService.getMedicalRecordById(this.patientId).subscribe({
+      next: (data) => {
+        console.log('Medical fetched:', data);
+        this.medicalRecord = data;
+      },
+      error: (err) => console.error('Error fetching patients:', err)
+    });
+  }
+
+  loadReporting(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.patientId = idParam ? +idParam : null;
+    if(!this.patientId) return ;
+
+    this.reportingService.getReportingById(this.patientId).subscribe({
+      next: (data) => {
+        console.log('Reporting fetched:', data);
+        this.reporting = data;
+      },
+      error: (err) => console.error('Error fetching Reporting:', err)
+    });
+  }
+
+  openEditDialog(): void {
+    if (!this.patient) return;
+    const dialogRef = this.dialog.open(PatientEdit, {
+      width: '750px',
+      data: this.patient
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) this.patient = result; 
+    });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/patients']);
+  }
+
+}
