@@ -46,8 +46,8 @@ export class PatientEdit {
       lastName: [this.patient?.lastName ?? '', Validators.required],
       dateOfBirth: [this.patient?.dateOfBirth ?? '', Validators.required],
       gender: [this.patient?.gender ?? '', Validators.required],
-      postalAddress: [this.patient?.postalAddress ?? ''],
-      phoneNumber: [this.patient?.phoneNumber ?? ''],
+      postalAddress: [this.patient?.postalAddress ?? null],
+      phoneNumber: [this.patient?.phoneNumber ?? null],
     });
   }
 

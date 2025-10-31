@@ -3,13 +3,13 @@
   <div class="header-container">
     <h2 class="title">Liste des patients</h2>
     <button mat-icon-button color="primary" class="edit-btn" (click)="openAddPatientDialog()">
-      <mat-icon>edit</mat-icon>
+      <mat-icon>add</mat-icon>
     </button>
   </div>
 
   @if (checkData == false) {
-    <div class="loader">
-      <ng-lottie [options]="lottie.loading"></ng-lottie>
+    <div class="heartBeat">
+      <ng-lottie [options]="lottie.loading" style="width: 150px; height: 150px; display: inline-block;"></ng-lottie>
     </div>
   } @else {
     <mat-form-field appearance="outline" class="search-bar">
@@ -68,7 +68,9 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element" (click)="viewPatient(element.id, element)">
-          <button type="button">View</button>
+          <button mat-icon-button color="primary">
+            <mat-icon>visibility</mat-icon> <!-- Icône de visibilité pour "View" -->
+          </button>
         </td>
       </ng-container>
 

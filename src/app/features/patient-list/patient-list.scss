@@ -1,5 +1,7 @@
 .patient-card {
-  margin: 2rem;
+  margin-top: 5rem;
+  margin-right: 10rem;
+  margin-left: 10rem;
   padding: 1.5rem;
   border-radius: 16px;
 }
@@ -35,14 +37,15 @@ mat-header-cell {
 }
 
 .title {
-  margin: 0;                   
+  margin: 0;                  
   font-size: 24px;             
   font-weight: 500;
 }
 
-.loader { 
+.heartBeat { 
   display: flex; 
   justify-content: center; 
   align-items: center;
-  height: 100px; 
+  width: 182px; 
+  height: 88px;
 }

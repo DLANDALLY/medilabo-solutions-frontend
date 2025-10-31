@@ -1,3 +1,22 @@
-<h1>Bienvenue sur HomePage !</h1>
+<div class="home-container">
+  <div class="overlay"></div>
 
-<app-patient-list></app-patient-list>
+  <mat-card class="welcome-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Prévention et suivi du risque de diabète</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>
+        Cet outil aide les médecins à identifier les patients à risque, suivre leurs habitudes
+        alimentaires et générer des rapports pour mieux prévenir le diabète.
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onLogin()">
+        S’authentifier
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

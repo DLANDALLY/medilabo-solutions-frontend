@@ -5,7 +5,7 @@ import { PatientService } from '../../services/patient/patient';
 import { MedicalRecord } from "../medical-record/medical-record";
 import { Reporting } from "../reporting/reporting";
 import { MatCardModule } from "@angular/material/card";
-import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { MatIconModule } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { PatientEdit } from '../patient-edit/patient-edit';
@@ -14,6 +14,8 @@ import { MedicalRecordService } from '../../services/medical-record/medical-reco
 import { IMedicalRecord } from '../interfaces/IMedicalRecord';
 import { ReportingService } from '../../services/reporting/reporting';
 import { IReporting } from '../interfaces/IReporting';
+import { AddMedicalRecord } from '../add-medical-record/add-medical-record';
+import { MedicalHistoricalDtos } from '../interfaces/MedicalHistoricalDtos';
 
 @Component({
   selector: 'app-patient-detail',
@@ -21,7 +23,6 @@ import { IReporting } from '../interfaces/IReporting';
     MedicalRecord, 
     Reporting, 
     MatCardModule, 
-    MatIcon,
     CommonModule,
     MatButtonModule,
     MatIconModule,
@@ -33,8 +34,9 @@ import { IReporting } from '../interfaces/IReporting';
 export class PatientDetail {
   patient: IPatient | null = null;
   patientId: number | null = null;
-  medicalRecord!: IMedicalRecord ;
-  reporting!: IReporting ;
+  medicalRecord: IMedicalRecord | null = null;
+  reporting: IReporting | null = null;
+  medicalHistorique: MedicalHistoricalDtos | null = null;
 
   constructor(
     private router: Router, 
@@ -63,7 +65,7 @@ export class PatientDetail {
       this.patient = statePatient;
     } else if (this.patientId) {
       this.patientService.getPatientById(this.patientId).subscribe({
-        next: (data) => (this.patient = data),
+        next: (data) => { this.patient = data },
         error: (err) => console.error('Erreur chargement patient', err),
       });
     } else {
@@ -111,8 +113,53 @@ export class PatientDetail {
     });
   }
 
+  onAddMedicalRecord(): void {
+    const dialogRef = this.dialog.open(AddMedicalRecord, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && this.patientId) {
+        console.log('✅ OnAddMedicalRecord déclenché');
+        console.log('🆔 ID patient :', this.patientId);
+        console.log('📝 Nouvelle note :', result);
+
+        const medicalHistorique: MedicalHistoricalDtos = result;
+
+        this.medicalRecordService.addNoteHistorique(this.patientId, medicalHistorique).subscribe({
+          next: (response) => {
+            console.log('✅ Note ajoutée avec succès', response);
+            this.loadMedicalRecord(); // recharger les données après succès
+            this.loadReporting();
+          },
+          error: (err) => {
+            console.error('❌ Erreur lors de l’ajout de la note :', err);
+          }
+        });
+      }
+    });
+  }
+
+
   goBack(): void {
     this.router.navigate(['/patients']);
   }
+
+  calculateAge(dateOfBirth?: Date | string): number {
+  if (!dateOfBirth) return 99;
+
+  const dob = new Date(dateOfBirth); // ✅ conversion string → Date
+  const today = new Date();
+
+  let age = today.getFullYear() - dob.getFullYear();
+  const hasBirthdayPassed =
+    today.getMonth() > dob.getMonth() ||
+    (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+
+  if (!hasBirthdayPassed) age--;
+
+  return age;
+}
+
 
 }

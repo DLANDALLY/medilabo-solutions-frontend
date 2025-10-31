@@ -1,12 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { PatientList } from "../patient-list/patient-list";
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [PatientList],
+  imports: [CommonModule, MatButtonModule, MatCardModule],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
 export class Home {
 
+  constructor(private router: Router){}
+  
+  onLogin() { this.router.navigate(['/login']); }
 }

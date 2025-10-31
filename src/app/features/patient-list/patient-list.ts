@@ -99,7 +99,9 @@ export class PatientList {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) this.patients.push(result);
+      //if (result) this.patients.push(result);
+      if (result)  this.loadPatients()
+      
     });
   }
 

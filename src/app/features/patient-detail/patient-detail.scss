@@ -20,11 +20,12 @@
 .title {
   display: flex;
   align-items: center;
+  justify-content: center; 
   gap: 8px;
   font-size: 1.8rem;
   font-weight: 600;
   color: #2c3e50;
-  margin: 0;                    
+  margin-bottom: 2%;                  
 }
 
 /* --- CARTE PRINCIPALE --- */
@@ -104,3 +105,16 @@
   margin-top: 32px;
   text-align: center;
 }
+
+mat-card-header {
+  display: flex;
+  align-items: center;
+}
+
+mat-card-title {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+

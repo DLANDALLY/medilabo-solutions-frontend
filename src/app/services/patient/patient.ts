@@ -10,14 +10,6 @@ export class PatientService {
 
   constructor(private http: HttpClient) {}
 
-  /* Version original 
-  getAllPatientsORIGINAL(): Observable<IPatient[]> {
-    console.log('>>> PatientService: méthode exécutée');
-    const url = `${this.baseUrl}/all`;
-    console.log('>>> URL appelée:', url);
-    return this.http.get<any[]>(url);
-  }*/
-
   getAllPatients(): Observable<IPatient[]> {
   return this.http.get<IPatient[]>(`${this.baseUrl}/all`).pipe(
     retryWhen(errors =>

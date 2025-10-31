@@ -12,17 +12,22 @@ export function playerFactory() {
 export class LottieFactory {
   private readonly basePath = 'assets/images/lotties/';
  
-  // Exemple d'animations disponibles
-  readonly loading: AnimationOptions = {
-    path: 'assets/images/lotties/loading.json',
+  readonly heartBeat: AnimationOptions = {
+    path: 'assets/images/lotties/heartBeat.json',
     autoplay: true,
     loop: true
   };
 
-  readonly success: AnimationOptions = {
-    path: this.basePath + 'success.json',
+  readonly login: AnimationOptions = {
+    path: this.basePath + 'Login.json',
     autoplay: true,
     loop: false
+  };
+
+  readonly loading: AnimationOptions = {
+    path: 'assets/images/lotties/loading.json',
+    autoplay: true,
+    loop: true
   };
 
   readonly error: AnimationOptions = {
@@ -30,4 +35,6 @@ export class LottieFactory {
     autoplay: true,
     loop: false
   };
+
+
 }

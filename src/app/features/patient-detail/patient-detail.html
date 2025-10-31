@@ -57,6 +57,20 @@
 
         <div class="info-item">
           <mat-icon color="warn">calendar_today</mat-icon>
+          <span class="label">Age :</span>
+          
+          @if (reporting?.age) {
+            <span class="value">{{ reporting?.age }}</span>
+          }@else if (patient?.dateOfBirth) {
+            <span class="value">{{ calculateAge(patient?.dateOfBirth) }}</span>
+          }@else {
+            <span class="value"> 0 </span>
+          }
+          
+        </div>
+
+        <div class="info-item">
+          <mat-icon color="warn">calendar_today</mat-icon>
           <span class="label">Créé le :</span>
           <span class="value">{{ patient?.createAt }}</span>
         </div>
@@ -67,14 +81,21 @@
   <!-- Dossier médical -->
   <div class="subsection-grid">
     <mat-card class="sub-card">
-      <mat-card-header>
-        <mat-card-title>
+      <mat-card-header class="flex items-center">
+        <mat-card-title class="flex items-center gap-2 flex-grow">
           <mat-icon color="accent">description</mat-icon>
           Dossier médical
         </mat-card-title>
+
+        <button matIconButton color="primary" (click)="onAddMedicalRecord()">
+          <mat-icon>add</mat-icon>
+        </button>
       </mat-card-header>
+
       <mat-card-content>
-        <app-medical-record [medicalRecord]="medicalRecord"></app-medical-record>
+        @if (medicalRecord !== null) {
+          <app-medical-record [medicalRecord]="medicalRecord"></app-medical-record>
+        }
       </mat-card-content>
     </mat-card>
 
@@ -87,7 +108,9 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <app-reporting [reporting]="reporting"></app-reporting>
+        @if (reporting) {
+          <app-reporting [reporting]="reporting"></app-reporting>
+        }
       </mat-card-content>
     </mat-card>
   </div>
