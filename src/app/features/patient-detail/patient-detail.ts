@@ -128,12 +128,12 @@ export class PatientDetail {
 
         this.medicalRecordService.addNoteHistorique(this.patientId, medicalHistorique).subscribe({
           next: (response) => {
-            console.log('✅ Note ajoutée avec succès', response);
+            console.log('Note ajoutée avec succès', response);
             this.loadMedicalRecord(); // recharger les données après succès
             this.loadReporting();
           },
           error: (err) => {
-            console.error('❌ Erreur lors de l’ajout de la note :', err);
+            console.error('Erreur lors de l’ajout de la note :', err);
           }
         });
       }
