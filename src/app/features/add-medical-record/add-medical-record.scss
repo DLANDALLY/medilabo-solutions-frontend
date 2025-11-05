@@ -1,0 +1,25 @@
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.medical-form {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}

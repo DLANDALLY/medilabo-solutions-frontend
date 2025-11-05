@@ -59,7 +59,6 @@ export class PatientDetail {
     
     const navigation = this.router.getCurrentNavigation();
     const statePatient = navigation?.extras?.state?.['patient'];
-    //const statePatient = history.state?.patient;
 
     if (statePatient) {
       this.patient = statePatient;
@@ -120,16 +119,12 @@ export class PatientDetail {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && this.patientId) {
-        console.log('✅ OnAddMedicalRecord déclenché');
-        console.log('🆔 ID patient :', this.patientId);
-        console.log('📝 Nouvelle note :', result);
-
         const medicalHistorique: MedicalHistoricalDtos = result;
 
         this.medicalRecordService.addNoteHistorique(this.patientId, medicalHistorique).subscribe({
           next: (response) => {
             console.log('Note ajoutée avec succès', response);
-            this.loadMedicalRecord(); // recharger les données après succès
+            this.loadMedicalRecord();
             this.loadReporting();
           },
           error: (err) => {
@@ -140,26 +135,23 @@ export class PatientDetail {
     });
   }
 
-
   goBack(): void {
     this.router.navigate(['/patients']);
   }
 
   calculateAge(dateOfBirth?: Date | string): number {
-  if (!dateOfBirth) return 99;
+    if (!dateOfBirth) return 99;
 
-  const dob = new Date(dateOfBirth); // ✅ conversion string → Date
-  const today = new Date();
+    const dob = new Date(dateOfBirth); 
+    const today = new Date();
 
-  let age = today.getFullYear() - dob.getFullYear();
-  const hasBirthdayPassed =
-    today.getMonth() > dob.getMonth() ||
-    (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+    let age = today.getFullYear() - dob.getFullYear();
+    const hasBirthdayPassed =
+      today.getMonth() > dob.getMonth() ||
+      (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
 
-  if (!hasBirthdayPassed) age--;
+    if (!hasBirthdayPassed) age--;
 
-  return age;
-}
-
-
+    return age;
+  }
 }

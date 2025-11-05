@@ -81,16 +81,17 @@
   <!-- Dossier médical -->
   <div class="subsection-grid">
     <mat-card class="sub-card">
-      <mat-card-header class="flex items-center">
-        <mat-card-title class="flex items-center gap-2 flex-grow">
+      <mat-card-header class="header-container">
+        <mat-card-title class="title">
           <mat-icon color="accent">description</mat-icon>
           Dossier médical
         </mat-card-title>
 
-        <button matIconButton color="primary" (click)="onAddMedicalRecord()">
+        <button mat-icon-button color="primary" (click)="onAddMedicalRecord()">
           <mat-icon>add</mat-icon>
         </button>
       </mat-card-header>
+
 
       <mat-card-content>
         @if (medicalRecord !== null) {

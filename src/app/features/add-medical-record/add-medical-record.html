@@ -4,8 +4,8 @@
   </mat-card-header>
 
   <mat-card-content>
-    <form (ngSubmit)="addNote()">
-      <mat-form-field appearance="outline" class="w-full">
+    <form (ngSubmit)="addNote()" class="medical-form">
+      <mat-form-field appearance="outline">
         <mat-label>Note du médecin</mat-label>
         <textarea
           matInput
@@ -17,7 +17,7 @@
         </textarea>
       </mat-form-field>
 
-      <div class="flex justify-end mt-2">
+      <div class="actions">
         <button mat-raised-button color="primary" type="submit">
           <mat-icon>add</mat-icon>
           Ajouter la note
@@ -26,4 +26,5 @@
     </form>
   </mat-card-content>
 </mat-card>
+
 
