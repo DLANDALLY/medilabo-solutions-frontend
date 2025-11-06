@@ -48,7 +48,7 @@ export class Login {
         },
         error => {
           console.error('Login échoué', error);
-          this.snackBar.open(error.message, 'Fermer', { duration: 3000 });
+          this.snackBar.open('Vérifiez vos identifiants et réessayez', 'Fermer', { duration: 3000 });
           this.isButtom = false;
         }
       );
@@ -56,5 +56,4 @@ export class Login {
       this.snackBar.open('username et mot de passe requis', 'Fermer', { duration: 3000 });
     }
   }
-
 }

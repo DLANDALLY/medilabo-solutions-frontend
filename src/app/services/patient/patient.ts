@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, delay, delayWhen, Observable, retryWhen, scan, throwError, timer } from 'rxjs';
+import { catchError, delayWhen, Observable, retryWhen, scan, throwError, timer } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { IPatient } from '../../features/interfaces/IPatient';
 

@@ -12,7 +12,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { PatientAdd } from '../patient-add/patient-add';
 import { PatientEdit } from '../patient-edit/patient-edit';
 import { MatButtonModule } from '@angular/material/button';
 import { LottieFactory } from '../../shared/lottie-factory';
@@ -104,6 +103,4 @@ export class PatientList {
       
     });
   }
-
- 
 }

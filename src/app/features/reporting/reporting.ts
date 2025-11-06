@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { IReporting } from '../interfaces/IReporting';
-import { ReportingService } from '../../services/reporting/reporting';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
